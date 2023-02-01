@@ -1,6 +1,7 @@
 package com.branovitski.taskmanager.ui.newnote
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -29,23 +30,30 @@ class NewNoteViewModel @Inject constructor(
 
     private val sourceNote: Note? = savedStateHandle[NewNoteFragment.ARG_NOTE]
 
+    val showToast = MutableLiveData<String>()
+
     val noteData: MutableLiveData<Note> = MutableLiveData<Note>().apply {
         value = sourceNote
     }
 
     fun createOrUpdateNote(title: String, note: String) {
         viewModelScope.launch {
-            try {
-                val newNote = sourceNote?.copy(title = title, notes = note)
-                    ?: Note(
-                        title = title,
-                        notes = note,
-                        date = getCurrentDate()
-                    )
-                repository.addNote(newNote)
-                router.exit()
-            } catch (e: Exception) {
-                e.printStackTrace()
+
+            if (title.isEmpty() || note.isEmpty()) {
+                showToast.postValue("is empty")
+            } else {
+                try {
+                    val newNote = sourceNote?.copy(title = title, notes = note)
+                        ?: Note(
+                            title = title,
+                            notes = note,
+                            date = getCurrentDate()
+                        )
+                    repository.addNote(newNote)
+                    router.exit()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }
