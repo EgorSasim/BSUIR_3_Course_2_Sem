@@ -28,7 +28,7 @@ class RssViewModel @Inject constructor(private val repository: RssRepository) : 
                 val response = repository.getGifs()
                 if (response.isSuccessful) {
                     val newListItems = response.body()?.items?.map { it.toNewsListItem() }
-                    data.postValue(newListItems)
+                    data.postValue(newListItems!!)
                 }
             } catch (e: Exception) {
                 //handle exception
