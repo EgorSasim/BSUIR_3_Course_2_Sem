@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  height: 100vh;
+  background-color: aquamarine;
+}
+
+.header {
+  text-align: center;
+  width: 100%;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.main {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.task-creator {
+  width: 100%;
+  min-width: 2rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.task-creator__inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.task-creator__add-file {
+  cursor: pointer;
+  text-transform: lowercase;
+}
+
+.tasks-list {
+  border-radius: 10px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 30px 20px;
+  margin-top: 10px;
+}

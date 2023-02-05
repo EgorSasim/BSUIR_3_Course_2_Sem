@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client server app</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="body">
+    <header class="header">
+      <h1>Client server app</h1>
+    </header>
+    <main class="main">
+      <div class="task-creator">
+        <div class="task-creator__inputs">
+          <input
+            type="text"
+            class="task-creator__task-name"
+            id="task-name"
+            placeholder="Task"
+          />
+          <select
+            name="status"
+            id="task-status"
+            class="task-creator__class-status"
+          >
+            <option value="status" disabled selected>Status</option>
+            <option value="no-status">No status</option>
+            <option value="to-do">To do</option>
+            <option value="in-progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
+          <input
+            type="file"
+            id="added-file"
+            class="task-creator__task-file"
+            placeholder="Add file"
+          />
+        </div>
+        <div class="task-creator__controls">
+          <div class="task-creator__sorting-controls">
+            <button class="task-creator__sort-tasks">Sort</button>
+          </div>
+          <div class="task-creator__adding-controls">
+            <button class="task-creator__task-add">Add task</button>
+          </div>
+        </div>
+      </div>
+      <div class="tasks-list"></div>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
