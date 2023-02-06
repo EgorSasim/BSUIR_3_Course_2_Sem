@@ -19,7 +19,7 @@
 }
 
 .main {
-  width: 30%;
+  width: 40%;
   margin: 0 auto;
 }
 
@@ -35,7 +35,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+.task-creator__inputs > * {
+  margin: 0.2rem;
 }
 
 .task-creator__add-file {
@@ -78,4 +82,10 @@
 .tasks-list__delete-task {
   cursor: pointer;
   background-color: aquamarine;
+}
+
+.task-creator__adding-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

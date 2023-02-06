@@ -1,5 +1,6 @@
 const taskName$ = document.querySelector(".task-creator__task-name");
-const taskStatus$ = document.querySelector(".task-creator__class-status");
+const taskStatus$ = document.querySelector(".task-creator__task-status");
+const taskDateTime$ = document.querySelector(".task-creator__task-date-time");
 const taskFile$ = document.querySelector(".task-creator__task-file");
 
 const addTask$ = document.querySelector(".task-creator__task-add");
@@ -22,6 +23,9 @@ const drawAddedTask = () => {
         </span>
         <span class="tasks-list__task-status">
             ${taskStatus$.value}
+        </span>
+        <span class="tasks-list__task-file">
+            ${taskDateTime$.value}
         </span>
         <span class="tasks-list__task-file">
             ${taskFile$.value}
