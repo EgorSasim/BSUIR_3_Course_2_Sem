@@ -27,44 +27,52 @@ addTask$.onclick = () => {
   }
 };
 
-const drawAddedTask = (taskName, taskStatus, taskDateTime, taskFile) => {
-  tasksList$.innerHTML += `
-    <div class="task">
-        <span class="tasks-list__task-name">
-            ${taskName}
-        </span>
-        <span class="tasks-list__task-status">
-            ${taskStatus}
-        </span>
-        <span class="tasks-list__task-file">
-            ${taskDateTime}
-        </span>
-        <span class="tasks-list__task-file">
-            ${taskFile}
-        </span>
-        <button class="tasks-list__delete-task">
-            &times
-        </button>
-    </div>
-    `;
-};
+function drawAddedTask(taskName, taskStatus, taskDateTime, taskFile, taskId) {
+  const addedElement = `
+  <div class="task ${taskId}">
+      <span class="tasks-list__task-name">
+          ${taskName}
+      </span>
+      <span class="tasks-list__task-status">
+          ${taskStatus}
+      </span>
+      <span class="tasks-list__task-file">
+          ${taskDateTime}
+      </span>
+      <span class="tasks-list__task-file">
+          ${taskFile}
+      </span>
+      <button class="tasks-list__delete-task">
+          &times
+      </button>
+  </div>
+  `;
+
+  tasksList$.innerHTML += addedElement;
+
+  for (let task of document.querySelectorAll(".task")) {
+    task.children[task.children.length - 1].onclick = () => {
+      removeTask(task.classList[1]);
+    };
+  }
+}
 
 function addTask(data) {
-  console.log(data);
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
   clearTasksList();
-  fetch(URL + "/data", options).then((response) =>
+  fetch(URL + "/tasks-list", options).then((response) =>
     response.text().then((resolve, reject) =>
       JSON.parse(resolve).forEach((task) => {
         drawAddedTask(
           task.taskName,
           task.taskStatus,
           task.taskDateTime,
-          task.taskFile
+          task.taskFile,
+          task.taskId
         );
       })
     )
@@ -73,4 +81,27 @@ function addTask(data) {
 
 function clearTasksList() {
   tasksList$.innerHTML = "";
+}
+
+function removeTask(taskId) {
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: toString(taskId),
+  };
+  clearTasksList();
+  fetch(URL + "/delete-task", options).then((response) =>
+    response.text().then((resolve, reject) =>
+      // JSON.parse(resolve).forEach((task) => {
+      //   drawAddedTask(
+      //     task.taskName,
+      //     task.taskStatus,
+      //     task.taskDateTime,
+      //     task.taskFile,
+      //     task.taskId
+      //   );
+      // })
+      console.log("resolve: ", resolve)
+    )
+  );
 }

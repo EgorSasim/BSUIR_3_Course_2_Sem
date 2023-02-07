@@ -40,11 +40,19 @@ app.get("/", (req, res) => {
 app.post("/tasks-list", (req, res) => {
   let task = req.body;
   if (Object.keys(task).length) {
-    addId(task);
-    console.log(task);
+    if (!task.taskId) {
+      task.taskId = Math.round(Math.random() * 10000);
+    }
     TASKS.push(task);
   }
   res.send(JSON.stringify(TASKS));
+  res.end();
+});
+
+app.post("/delete-task", (req, res) => {
+  let task = req.body;
+  console.log("task: ", task);
+  res.send("task was deleted");
   res.end();
 });
 
