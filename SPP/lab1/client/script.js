@@ -4,13 +4,22 @@ const taskStatus$ = document.querySelector(".task-creator__task-status");
 const taskDateTime$ = document.querySelector(".task-creator__task-date-time");
 const taskFile$ = document.querySelector(".task-creator__task-file");
 
-//add button
+//buttons
 const addTask$ = document.querySelector(".task-creator__task-add");
+const sortTasks$ = document.querySelector(".task-creator__sort-tasks");
 
 //tasks list
 const tasksList$ = document.querySelector(".tasks-list");
 
+//sort order
+const ascendingOrder$ = document.querySelector("#ascending");
+
 const URL = "http://127.0.0.1:3000";
+
+const STATUS_ORDER = {
+  ascending: "ascending",
+  descending: "descending",
+};
 
 addTask();
 
@@ -25,6 +34,12 @@ addTask$.onclick = () => {
       taskFile: taskFile$.value,
     });
   }
+};
+
+sortTasks$.onclick = () => {
+  sortTasks(
+    ascendingOrder$.checked ? STATUS_ORDER.ascending : STATUS_ORDER.descending
+  );
 };
 
 function drawAddedTask(taskName, taskStatus, taskDateTime, taskFile, taskId) {
@@ -91,6 +106,29 @@ function removeTask(taskId) {
   };
   clearTasksList();
   fetch(URL + "/delete-task", options).then((response) =>
+    response.text().then((resolve, reject) =>
+      JSON.parse(resolve).forEach((task) => {
+        drawAddedTask(
+          task.taskName,
+          task.taskStatus,
+          task.taskDateTime,
+          task.taskFile,
+          task.taskId
+        );
+      })
+    )
+  );
+}
+
+function sortTasks(order) {
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ sort: order }),
+  };
+  clearTasksList();
+  console.log("sended info: ", JSON.stringify({ sort: order }));
+  fetch(URL + "/sort-tasks", options).then((response) =>
     response.text().then((resolve, reject) =>
       JSON.parse(resolve).forEach((task) => {
         drawAddedTask(

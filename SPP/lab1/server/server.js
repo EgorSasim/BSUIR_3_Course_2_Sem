@@ -22,6 +22,7 @@ const TASKS = [
   },
 ];
 
+const TASK_STATUSES = ["No status", "To do", "In progress", "Done"];
 const app = express();
 
 app.use(express.static(path.join(__dirname, "../client/")));
@@ -58,6 +59,14 @@ app.post("/delete-task", (req, res) => {
   res.end();
 });
 
+app.post("/sort-tasks", (req, res) => {
+  let order = req.body;
+  console.log("order-sort: ", order.sort);
+  sortTasks(order.sort);
+  res.send(TASKS);
+  res.end();
+});
+
 app.listen(PORT);
 
 function removeTask(taskId) {
@@ -65,4 +74,21 @@ function removeTask(taskId) {
     TASKS.findIndex((task) => task.taskId == taskId),
     1
   );
+}
+
+function sortTasks(order) {
+  console.log("sort tasks order: ", order);
+  if (order == "ascending") {
+    TASKS.sort(
+      (task1, task2) =>
+        TASK_STATUSES.findIndex((status) => status == task1.taskStatus) -
+        TASK_STATUSES.findIndex((status) => status == task2.taskStatus)
+    );
+  } else {
+    TASKS.sort(
+      (task1, task2) =>
+        TASK_STATUSES.findIndex((status) => status == task2.taskStatus) -
+        TASK_STATUSES.findIndex((status) => status == task1.taskStatus)
+    );
+  }
 }
