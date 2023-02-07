@@ -33,6 +33,8 @@ app.use(
   })
 );
 
+app.use(cors({ origin: ["http://localhost:3000", "http://127.0.0.1:3000"] }));
+
 app.get("/", (req, res) => {
   res.render(path.join(__dirname, "../client/index.html"));
 });
@@ -51,9 +53,16 @@ app.post("/tasks-list", (req, res) => {
 
 app.post("/delete-task", (req, res) => {
   let task = req.body;
-  console.log("task: ", task);
-  res.send("task was deleted");
+  removeTask(task.id);
+  res.send(JSON.stringify(TASKS));
   res.end();
 });
 
 app.listen(PORT);
+
+function removeTask(taskId) {
+  TASKS.splice(
+    TASKS.findIndex((task) => task.taskId == taskId),
+    1
+  );
+}

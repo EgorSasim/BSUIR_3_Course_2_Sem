@@ -87,21 +87,20 @@ function removeTask(taskId) {
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: toString(taskId),
+    body: JSON.stringify({ id: taskId }),
   };
   clearTasksList();
   fetch(URL + "/delete-task", options).then((response) =>
     response.text().then((resolve, reject) =>
-      // JSON.parse(resolve).forEach((task) => {
-      //   drawAddedTask(
-      //     task.taskName,
-      //     task.taskStatus,
-      //     task.taskDateTime,
-      //     task.taskFile,
-      //     task.taskId
-      //   );
-      // })
-      console.log("resolve: ", resolve)
+      JSON.parse(resolve).forEach((task) => {
+        drawAddedTask(
+          task.taskName,
+          task.taskStatus,
+          task.taskDateTime,
+          task.taskFile,
+          task.taskId
+        );
+      })
     )
   );
 }
