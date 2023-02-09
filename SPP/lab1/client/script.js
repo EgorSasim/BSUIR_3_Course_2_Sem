@@ -80,8 +80,8 @@ function addTask(data) {
   };
   clearTasksList();
   fetch(URL + "/tasks-list", options).then((response) =>
-    response.text().then((resolve, reject) =>
-      JSON.parse(resolve).forEach((task) => {
+    response.text().then((tasks) =>
+      JSON.parse(tasks).forEach((task) => {
         drawAddedTask(
           task.taskName,
           task.taskStatus,
