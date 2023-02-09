@@ -24,7 +24,7 @@ const STATUS_ORDER = {
 addTask();
 
 addTask$.onclick = () => {
-  if (taskName$.value.length === 0) {
+  if (taskName$.value.trim().length === 0) {
     alert("please, write task name before adding it");
   } else {
     addTask({
