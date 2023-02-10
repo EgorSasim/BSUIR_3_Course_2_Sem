@@ -1,0 +1,15 @@
+1. UDP												src		dest
+2. 	Discover: 0.0.0.0 255.255.255.255		ports: 68		67
+	Offer:    192.168.0.1 192.168.100.214	ports: 67		68
+	Request:  0.0.0.0 255.255.255.255		ports: 68		67
+	ACK: 	  192.168.100.1 192.168.100.214 ports: 67		68
+3. request contains unique ip, suggested by DHCP server
+4. Transaction-ID:
+	Discover: 0x1f84e74
+	Offer:	  0x1f84e74
+	Request: 0x1f84e74
+	ACK: 0x1f84e74
+5. Discover: 0.0.0.0 255.255.255.255	   
+   Offer:    192.168.0.1 192.168.100.214  
+   Request:  0.0.0.0 255.255.255.255	   
+   ACK: 	  192.168.100.1 192.168.100.214
