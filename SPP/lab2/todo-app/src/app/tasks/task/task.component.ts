@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { TaskStatus } from 'src/app/tasks/tasks-page/tasks-page.typings';
+import { TaskService } from 'src/app/tasks/task.service';
+import { Task, TaskStatus } from 'src/app/tasks/tasks-page/tasks-page.typings';
 
 @Component({
   selector: 'app-task',
@@ -7,7 +8,10 @@ import { TaskStatus } from 'src/app/tasks/tasks-page/tasks-page.typings';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
-  @Input() public id?: string;
-  @Input() public name?: string;
-  @Input() public status?: TaskStatus;
+  @Input() public task?: Task;
+
+  constructor(private taskService: TaskService) {}
+  public deleteTask(id: number): void {
+    this.taskService.removeTask(id);
+  }
 }

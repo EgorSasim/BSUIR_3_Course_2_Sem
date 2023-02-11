@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormGroup } from '@angular/forms';
+import { TaskService } from 'src/app/tasks/task.service';
 import {
+  Task,
   TasksForm,
   TaskStatus,
 } from 'src/app/tasks/tasks-page/tasks-page.typings';
@@ -14,17 +16,17 @@ export class TasksPageComponent {
   public tasks: FormGroup<TasksForm> = this.initTasks();
   public taskStatus?: TaskStatus;
 
+  constructor(private taskService: TaskService) {}
+
   public addTask(): void {
-    console.log(this.tasks.controls);
+    this.taskService.addTask(this.tasks.value as Task);
   }
 
   private initTasks(): FormGroup<TasksForm> {
     return new FormGroup<TasksForm>({
       name: new FormControl(),
       completionTime: new FormControl(),
-      status: new FormControl<TaskStatus>(TaskStatus.NoStatus, {
-        nonNullable: true,
-      }),
+      status: new FormControl(TaskStatus.NoStatus),
     });
   }
 }

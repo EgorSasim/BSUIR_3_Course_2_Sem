@@ -2,8 +2,8 @@ import { FormControl } from '@angular/forms';
 
 export interface TasksForm {
   name: FormControl<string>;
-  completionTime: FormControl<Date>;
   status: FormControl<TaskStatus>;
+  completionTime: FormControl<Date>;
 }
 
 export enum TaskStatus {
@@ -11,4 +11,11 @@ export enum TaskStatus {
   InProgress = 'In progress',
   Done = 'Done',
   NoStatus = 'No status',
+}
+
+export interface Task {
+  id: number;
+  name: string;
+  status: TaskStatus;
+  completionTime: Date;
 }

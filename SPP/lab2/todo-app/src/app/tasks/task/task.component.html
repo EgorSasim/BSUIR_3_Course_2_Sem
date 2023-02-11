@@ -1,1 +1,9 @@
-<p>task works!</p>
+<div task-container>
+  <div class="task-id">{{ task.id }}</div>
+  <div class="task-name">{{ task.name }}</div>
+  <div class="task-status">{{ task.status }}</div>
+  <div class="task-completion-time">{{ task.completionTime }}</div>
+  <button class="task-delete-task" (click)="deleteTask(task.id)">
+    Delete task
+  </button>
+</div>
