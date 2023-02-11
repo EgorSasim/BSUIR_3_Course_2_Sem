@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TaskService } from 'src/app/tasks/task.service';
-import { Task, TaskStatus } from 'src/app/tasks/tasks-page/tasks-page.typings';
+import { Task } from 'src/app/tasks/tasks-page/tasks-page.typings';
 
 @Component({
   selector: 'app-task',
