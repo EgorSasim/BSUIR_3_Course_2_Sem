@@ -8,7 +8,18 @@ import { Task } from 'src/app/tasks/tasks-page/tasks-page.typings';
   styleUrls: ['./tasks-list.component.scss'],
 })
 export class TasksListComponent {
-  @Input() tasksList?: Task[] = this.taskService.getTasksList();
+  public tasksList?: Task[];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) {
+    this.taskService
+      .getTasksList()
+      .then((data: Response) =>
+        data
+          .text()
+          .then((tasksList) => (this.tasksList = JSON.parse(tasksList)))
+      );
+    this.taskService.tasksList$.subscribe(
+      (tasksList) => (this.tasksList = tasksList)
+    );
+  }
 }

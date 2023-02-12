@@ -1,45 +1,49 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Task, TaskStatus } from 'src/app/tasks/tasks-page/tasks-page.typings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  public TASKS: Task[] = [
-    {
-      id: 1,
-      name: 'wash the car',
-      status: TaskStatus.ToDo,
-      completionTime: new Date(),
-    },
-    {
-      id: 2,
-      name: 'buy flowers',
-      status: TaskStatus.NoStatus,
-      completionTime: new Date(),
-    },
-    {
-      id: 3,
-      name: 'fix bug',
-      status: TaskStatus.Done,
-      completionTime: new Date(),
-    },
-  ];
+  private URL: string = 'http://127.0.0.1:3000/';
 
-  public addTask(task: Task) {
-    task.id = Math.floor(Math.random() * 1000) + 3;
-    this.TASKS.push(task);
-    console.log(this.TASKS);
+  public tasksList$: Subject<Task[]> = new Subject();
+
+  public getTasksList(): Promise<Response | void> {
+    const queryOptions = {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+    return fetch(this.URL, queryOptions);
   }
 
-  public getTasksList(): Task[] {
-    return this.TASKS;
+  public addTask(task: Task) {
+    const queryOptions = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    };
+    fetch(this.URL + 'add-task', queryOptions).then((resp) =>
+      resp.text().then((data) => this.tasksList$.next(JSON.parse(data)))
+    );
   }
 
   public removeTask(id: number) {
-    this.TASKS.splice(
-      this.TASKS.findIndex((task) => task.id === id),
-      1
+    const queryOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ id: id }),
+    };
+
+    fetch(this.URL + 'remove-task', queryOptions).then((resp) =>
+      resp.text().then((data) => this.tasksList$.next(JSON.parse(data)))
     );
   }
 }
