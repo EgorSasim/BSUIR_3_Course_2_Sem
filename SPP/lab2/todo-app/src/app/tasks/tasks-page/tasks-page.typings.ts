@@ -19,3 +19,8 @@ export interface Task {
   status: TaskStatus;
   completionTime: Date;
 }
+
+export enum TaskValidityErr {
+  NoName,
+  NoErr,
+}

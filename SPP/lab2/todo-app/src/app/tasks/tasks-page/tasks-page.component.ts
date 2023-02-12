@@ -5,6 +5,7 @@ import {
   Task,
   TasksForm,
   TaskStatus,
+  TaskValidityErr,
 } from 'src/app/tasks/tasks-page/tasks-page.typings';
 
 @Component({
@@ -19,7 +20,9 @@ export class TasksPageComponent {
   constructor(private taskService: TaskService) {}
 
   public addTask(): void {
-    this.taskService.addTask(this.tasks.value as Task);
+    this.checkTaskValidity() === TaskValidityErr.NoName
+      ? this.showErrorToast(TaskValidityErr.NoName)
+      : this.taskService.addTask(this.tasks.value as Task);
   }
 
   private initTasks(): FormGroup<TasksForm> {
@@ -28,5 +31,21 @@ export class TasksPageComponent {
       completionTime: new FormControl(),
       status: new FormControl(TaskStatus.NoStatus),
     });
+  }
+
+  private checkTaskValidity(): TaskValidityErr {
+    return this.tasks.value.name
+      ? TaskValidityErr.NoErr
+      : TaskValidityErr.NoName;
+  }
+
+  private showErrorToast(err: TaskValidityErr): void {
+    switch (err) {
+      case TaskValidityErr.NoName:
+        alert('Please, provide task name');
+        break;
+      default:
+        return;
+    }
   }
 }
