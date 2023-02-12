@@ -2,13 +2,13 @@
   <h1 class="tasks-page-header">To do list</h1>
   <div class="tasks-page-task-creator">
     <input
-      class="tasks-page-task-creator__task-name"
+      class="tasks-page-task-creator__task-name tasks-page-task-creator__item"
       type="text"
       placeholder="Task name"
       [formControl]="tasks.controls['name']"
     />
     <select
-      class="tasks-page-task-creator__task-status"
+      class="tasks-page-task-creator__task-status tasks-page-task-creator__item"
       [formControl]="tasks.controls['status']"
     >
       <option>No status</option>
@@ -17,7 +17,7 @@
       <option>Done</option>
     </select>
     <input
-      class="tasks-page-task-creator__task-completion-time"
+      class="tasks-page-task-creator__task-completion-time tasks-page-task-creator__item"
       type="date"
       [formControl]="tasks.controls['completionTime']"
     />
