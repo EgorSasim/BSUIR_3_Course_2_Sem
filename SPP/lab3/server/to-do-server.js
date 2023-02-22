@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 
@@ -34,6 +38,17 @@ const TASKS = [
   },
 ];
 
+const USERS = [
+  {
+    name: "Igor",
+    password: "123",
+  },
+  {
+    name: "Gregory",
+    password: "456",
+  },
+];
+
 const TASKS_IDS = new Set([TASKS.map((task) => task.id)]);
 
 app.use(
@@ -61,8 +76,12 @@ app.post("/add-task", (req, res) => {
   res.end();
 });
 
+app.post("/login", authenticateToken, (req, res) => {
+  const token = generateAccessToken(req.body.userName);
+  res.json(token);
+});
+
 app.delete("/remove-task", (req, res) => {
-  console.log(req.body);
   let taskId = req.body.id;
   removeTask(taskId);
   res.send(JSON.stringify(TASKS));
@@ -87,10 +106,39 @@ function getRandomNum(min = 0, max = 10000) {
 }
 
 function removeTask(taskId) {
-  console.log(taskId);
-  console.log(TASKS.findIndex((task) => task.id === taskId));
   TASKS.splice(
     TASKS.findIndex((task) => task.id === taskId),
     1
   );
+}
+
+function generateAccessToken(userName) {
+  return jwt.sign({ name: userName }, process.env.TOKEN_SECRET, {
+    expiresIn: "1800s",
+  });
+}
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (!token) {
+    return res.sendStatus(401);
+  }
+
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+    console.log(err);
+
+    if (err) {
+      return res.sendStatus(403);
+    }
+
+    req.user = user;
+
+    next();
+  });
+}
+
+function checkExistingName(name) {
+  return USERS.find((user) => user.name === name);
 }
