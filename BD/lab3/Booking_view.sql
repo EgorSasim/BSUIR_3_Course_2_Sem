@@ -1,0 +1,1 @@
+CREATE VIEW booking (book_id) as SELECT Booking
