@@ -1,0 +1,35 @@
+.nav-bar-wrap {
+  width: 80%;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  min-height: 1.5rem;
+}
+
+.nav-bar-authentication-wrap {
+  display: flex;
+  width: 10%;
+  margin-left: auto;
+  justify-content: space-between;
+}
+
+.nav-bar-authentication-button {
+  font-size: 1.2rem;
+  color: plum;
+  cursor: pointer;
+}
+.nav-bar-authentication-button:hover {
+  text-decoration: underline;
+}
+
+.nav-bar-sign-up-wrap {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+}

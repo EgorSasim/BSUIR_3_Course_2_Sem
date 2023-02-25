@@ -1,0 +1,87 @@
+.sign-up-modal {
+  width: 50%;
+  height: 30%;
+  margin: 10% auto;
+  padding: 1.5rem;
+  background-color: white;
+  position: relative;
+  border-radius: 0.5rem;
+  min-height: 20rem;
+}
+
+.sign-up-close-modal {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.5rem;
+  color: red;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.sign-up-header {
+  font-size: 2rem;
+  color: plum;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.sign-up-control-wrapper {
+  width: 80%;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sign-up-control-label {
+  font-size: 1.5rem;
+  display: block;
+  color: plum;
+}
+
+.sign-up-control-input {
+  text-decoration: underline;
+  color: plum;
+}
+
+.sign-up-control-input::placeholder {
+  color: plum;
+}
+
+.sign-up-control-input:focus {
+  text-decoration: none;
+}
+
+.sign-up-complete-button-wrapper {
+  width: 100%;
+  margin-top: 3rem;
+}
+.sign-up-complete-button {
+  display: block;
+  margin: 5rem;
+  color: black;
+  cursor: pointer;
+  margin: 0 auto;
+  font-size: 2rem;
+  border: 1px solid plum;
+  border-radius: 0.5rem;
+  width: 30%;
+  transition: 1s;
+}
+
+.sign-up-complete-button:hover {
+  transition: 1s;
+  background-color: plum;
+  color: white;
+}
+
+.sign-up-complete-button:disabled {
+  cursor: zoom-in;
+}
+
+.sign-up-control-not-same-passwords-error {
+  color: red;
+  position: absolute;
+  right: 9rem;
+  top: 14rem;
+}

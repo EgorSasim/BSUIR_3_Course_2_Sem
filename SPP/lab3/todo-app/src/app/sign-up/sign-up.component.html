@@ -1,0 +1,50 @@
+<div class="sign-up-modal">
+  <div class="sign-up-close-modal" (click)="closeModal.emit()">&times;</div>
+  <div class="sign-up-header">Sign up modal form</div>
+  <div class="sign-up-login-wrapper sign-up-control-wrapper">
+    <label class="sign-up-control-label" for="login">Login</label>
+    <input
+      class="sign-up-control-input"
+      type="text"
+      name=""
+      id="login"
+      placeholder="write login here"
+      [formControl]="signUpForm.get('login')"
+    />
+  </div>
+  <div class="sign-up-password-wrapper sign-up-control-wrapper">
+    <label class="sign-up-control-label" for="password">Password</label>
+    <input
+      class="sign-up-control-input"
+      type="password"
+      placeholder="write password here"
+      [formControl]="signUpForm.get('password')"
+    />
+  </div>
+  <div class="sign-up-repeat-password-wrapper sign-up-control-wrapper">
+    <label class="sign-up-control-label" for="rep-password"
+      >Repeat password</label
+    >
+    <input
+      class="sign-up-control-input"
+      type="password"
+      placeholder="repeat password here"
+      [formControl]="signUpForm.get('repPassword')"
+    />
+    <div
+      *ngIf="signUpForm.hasError('notSameValues')"
+      class="sign-up-control-not-same-passwords-error"
+    >
+      *Not same passwords!!!
+    </div>
+  </div>
+  <div class="sign-up-complete-button-wrapper">
+    <button
+      class="sign-up-complete-button"
+      [disabled]="signUpForm.invalid"
+      (click)="submitForm()"
+    >
+      Sign up
+    </button>
+  </div>
+</div>
