@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { MAIN_SERVER_URL } from 'src/app/serverUrls/mainServerUrls';
 import { Task, TaskStatus } from 'src/app/tasks/tasks-page/tasks-page.typings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private URL: string = 'http://127.0.0.1:3000/';
-
   public tasksList$: Subject<Task[]> = new Subject();
 
   public getTasksList(): Promise<Response | void> {
@@ -17,7 +16,7 @@ export class TaskService {
         'Content-type': 'application/json',
       },
     };
-    return fetch(this.URL, queryOptions);
+    return fetch(MAIN_SERVER_URL, queryOptions);
   }
 
   public addTask(task: Task) {
@@ -28,7 +27,7 @@ export class TaskService {
       },
       body: JSON.stringify(task),
     };
-    fetch(this.URL + 'add-task', queryOptions).then((resp) =>
+    fetch(MAIN_SERVER_URL + 'add-task', queryOptions).then((resp) =>
       resp.text().then((data) => this.tasksList$.next(JSON.parse(data)))
     );
   }
@@ -42,7 +41,7 @@ export class TaskService {
       body: JSON.stringify({ id: id }),
     };
 
-    fetch(this.URL + 'remove-task', queryOptions).then((resp) =>
+    fetch(MAIN_SERVER_URL + 'remove-task', queryOptions).then((resp) =>
       resp.text().then((data) => this.tasksList$.next(JSON.parse(data)))
     );
   }

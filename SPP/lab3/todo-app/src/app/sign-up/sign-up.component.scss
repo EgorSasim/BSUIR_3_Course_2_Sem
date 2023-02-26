@@ -77,6 +77,8 @@
 
 .sign-up-complete-button:disabled {
   cursor: zoom-in;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
 .sign-up-control-not-same-passwords-error {

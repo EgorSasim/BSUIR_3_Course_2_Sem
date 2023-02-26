@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignUpForm } from 'src/app/sign-up/sign-up.component.typings';
+import { SignUpService } from 'src/app/sign-up/sign-up.service';
 import { sameValuesValidator } from 'src/app/validators/validators';
 
 @Component({
@@ -12,8 +13,10 @@ export class SignUpComponent {
   @Output() public closeModal: EventEmitter<null> = new EventEmitter();
   public signUpForm: FormGroup<SignUpForm> = this.initSignUpForm();
 
+  constructor(private signUpService: SignUpService) {}
+
   public submitForm(): void {
-    console.log(this.signUpForm);
+    this.signUpService.signUp();
   }
 
   private initSignUpForm(): FormGroup<SignUpForm> {
