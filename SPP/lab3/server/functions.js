@@ -20,4 +20,12 @@ function removeTask(taskId) {
   );
 }
 
-module.exports = { addTask, removeTask };
+function isUserAlreadyExists(login) {
+  return constants.USERS.find((user) => user.login === login);
+}
+
+function addUser(user) {
+  constants.USERS.push(user);
+}
+
+module.exports = { addTask, removeTask, isUserAlreadyExists, addUser };

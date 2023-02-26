@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NabBarService } from 'src/app/nav-bar/nav-bar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,6 +9,8 @@ import { Component } from '@angular/core';
 export class NavBarComponent {
   public isVisibleSignIn: boolean = false;
   public isVisibleSignUp: boolean = false;
+
+  constructor(private navBarService: NabBarService) {}
 
   public showSignInModal(): void {
     this.isVisibleSignIn = true;
@@ -23,5 +26,9 @@ export class NavBarComponent {
 
   public hideSignUpModal(): void {
     this.isVisibleSignUp = false;
+  }
+
+  public getSecret() {
+    this.navBarService.getSecret();
   }
 }

@@ -32,11 +32,11 @@ const TASKS_IDS = new Set([TASKS.map((task) => task.id)]);
 
 const USERS = [
   {
-    name: "Igor",
+    login: "Igor",
     password: "123",
   },
   {
-    name: "Gregory",
+    login: "Gregory",
     password: "456",
   },
 ];

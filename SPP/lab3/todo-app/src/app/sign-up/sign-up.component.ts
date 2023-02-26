@@ -16,7 +16,15 @@ export class SignUpComponent {
   constructor(private signUpService: SignUpService) {}
 
   public submitForm(): void {
-    this.signUpService.signUp();
+    this.signUpService
+      .signUp(
+        this.signUpForm.get('login').value,
+        this.signUpForm.get('password').value
+      )
+      .subscribe((res: { token: string }) => {
+        localStorage.setItem('token', res.token);
+        console.log(localStorage);
+      });
   }
 
   private initSignUpForm(): FormGroup<SignUpForm> {

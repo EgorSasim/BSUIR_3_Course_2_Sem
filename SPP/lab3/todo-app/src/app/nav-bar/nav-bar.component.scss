@@ -5,6 +5,7 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
   min-height: 1.5rem;
+  display: flex;
 }
 
 .nav-bar-authentication-wrap {
@@ -32,4 +33,10 @@
   width: 100%;
   height: 100%;
   background-color: rgba($color: #000000, $alpha: 0.8);
+}
+
+.nav-bar-secret {
+  color: plum;
+  size: 1rem;
+  cursor: pointer;
 }
