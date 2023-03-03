@@ -1,0 +1,21 @@
+<div class="nav-bar-wrap">
+  <div class="nav-bar-secret" (click)="getSecret()">Secret</div>
+  <div class="nav-bar-authentication-wrap">
+    <div
+      class="nav-bar-sign-in nav-bar-authentication-button"
+      (click)="showSignInModal()"
+    >
+      Sign in
+    </div>
+    <div
+      class="nav-bar-sign-up nav-bar-authentication-button"
+      (click)="showSignUpModal()"
+    >
+      Sign up
+    </div>
+  </div>
+</div>
+
+<div class="nav-bar-sign-up-wrap" *ngIf="isVisibleSignUp">
+  <app-sign-up (closeModal)="hideSignUpModal()"></app-sign-up>
+</div>
