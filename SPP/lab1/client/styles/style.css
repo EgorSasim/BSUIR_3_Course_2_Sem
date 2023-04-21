@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  height: 100vh;
+  background-color: aquamarine;
+}
+
+.header {
+  text-align: center;
+  width: 100%;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.main {
+  width: 40%;
+  margin: 0 auto;
+}

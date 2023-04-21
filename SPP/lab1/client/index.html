@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client server app</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/buttons.css" />
+    <link rel="stylesheet" href="../styles/tasks.css" />
+  </head>
+  <body class="body">
+    <header class="header">
+      <h1>Client server app</h1>
+    </header>
+    <main class="main">
+      <div class="task-creator">
+        <div class="task-creator__inputs">
+          <input
+            type="text"
+            class="task-creator__task-name"
+            id="task-name"
+            placeholder="Task"
+          />
+          <select
+            name="status"
+            id="task-status"
+            class="task-creator__task-status"
+          >
+            <option value="no-status" disabled selected>No status</option>
+            <option value="to-do">To do</option>
+            <option value="in-progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
+          <input
+            type="datetime-local"
+            class="task-creator__task-date-time"
+            placeholder="Finishing time"
+          />
+          <input
+            type="file"
+            id="added-file"
+            class="task-creator__task-file"
+            placeholder="Add file"
+          />
+        </div>
+        <div class="task-creator__controls">
+          <div class="task-creator__sorting-controls">
+            <button class="task-creator__sort-tasks button">
+              Sort by status
+            </button>
+            <input type="radio" name="order" id="ascending" checked />
+            <label for="ascending">Ascending</label>
+            <input type="radio" name="order" id="descending" />
+            <label for="descending">Descending</label>
+          </div>
+          <div class="task-creator__adding-controls">
+            <button class="task-creator__task-add button">Add task</button>
+          </div>
+        </div>
+      </div>
+      <div class="tasks-list"></div>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
