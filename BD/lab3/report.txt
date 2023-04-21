@@ -1,0 +1,3 @@
+add index in boarding_pass (ticket_flight_seat) ot make seat, airplane and departure id unique
+
+link form flight to city to make search not through airports but through cities
