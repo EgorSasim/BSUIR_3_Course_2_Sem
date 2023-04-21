@@ -1,0 +1,12 @@
+*ping instagram.com
+1. TCP for big data and UDP for little particles of information;
+2. src: 192.168.100.218 port: 54645 dest gateway(192.168.100.1) instagram(31.13.81.174) port: 53
+3. grep "nameserver" /etc/resolv.conf  // answer: yes, they are the same
+4. recursive (in DNS Flags)
+5.Name: instagram.com
+  Type: A(Host Address) (1)
+  Class: IN (0x001)
+  Time to live: 154
+  Data length: 4
+  Address: 31.13.81.174
+
